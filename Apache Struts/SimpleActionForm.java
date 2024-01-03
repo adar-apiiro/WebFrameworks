@@ -15,12 +15,14 @@ public class SimpleActionForm extends ActionForm {
 
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        
-        if (name == null || name.trim().equals("")) {
+
+        // Validate 'name'
+        if (name == null || name.trim().isEmpty()) {
             errors.add("name", new ActionMessage("error.name.required"));
         }
 
-        if (email == null || email.trim().equals("")) {
+        // Validate 'email'
+        if (email == null || email.trim().isEmpty()) {
             errors.add("email", new ActionMessage("error.email.required"));
         }
 
