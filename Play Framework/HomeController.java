@@ -1,29 +1,41 @@
 package controllers;
 
 import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Http.Request;
 
-/**
- * This controller contains an action to handle HTTP requests
- * to the application's home page.
- */
+import views.html.home;
+import views.html.user;
+
+import java.text.DateFormat;
+import java.util.Date;
+
 public class HomeController extends Controller {
 
     /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
+     * Simply selects the home view to render by returning its name.
      */
-    public Result index() {
-        return ok(views.html.index.render());
-    }
-    
-    public Result explore() {
-        return ok(views.html.explore.render());
-    }
-    
-    public Result tutorial() {
-        return ok(views.html.tutorial.render());
+    public Result home() {
+        System.out.println("Home Page Requested");
+        Date date = new Date();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, request().locale());
+
+        String formattedDate = dateFormat.format(date);
+
+        return ok(home.render(formattedDate));
     }
 
+    public Result user() {
+        System.out.println("User Page Requested");
+        User user = new User(); // Assuming you have a User model class
+        user.setUserName(request().body().asFormUrlEncoded().get("userName")[0]);
+
+        return ok(user.render(user));
+    }
+
+    public Result redirectToHome() {
+        flash("info", "Redirected to Home Page"); // Flash message example
+        return redirect(routes.HomeController.home());
+    }
 }
