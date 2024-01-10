@@ -20,5 +20,4 @@ public class DataController {
         modelAndView.addObject("data", fetchData());
         return modelAndView;
     }
-  
 }
