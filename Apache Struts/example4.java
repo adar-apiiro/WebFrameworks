@@ -21,8 +21,12 @@ public class MyApiAction extends Action {
             // Handle different HTTP methods
             if ("GET".equals(request.getMethod())) {
                 // Handle GET request
+                String parameterValue = request.getParameter("parameterName");
+                // Perform logic for GET request
             } else if ("POST".equals(request.getMethod())) {
                 // Handle POST request
+                String requestBody = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+                // Perform logic for POST request
             }
 
             // Your API logic here
@@ -38,5 +42,15 @@ public class MyApiAction extends Action {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return mapping.findForward("error");
         }
+    }
+
+    private boolean isUserAuthenticated(HttpServletRequest request) {
+        // Implement authentication logic
+        return true; // Replace with actual authentication logic
+    }
+
+    private boolean isUserAuthorized(HttpServletRequest request) {
+        // Implement authorization logic
+        return true; // Replace with actual authorization logic
     }
 }
