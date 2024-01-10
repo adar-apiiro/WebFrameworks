@@ -1,6 +1,3 @@
-// MyApiAction.java
-package com.example;
-
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -41,15 +38,5 @@ public class MyApiAction extends Action {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return mapping.findForward("error");
         }
-    }
-
-    private boolean isUserAuthenticated(HttpServletRequest request) {
-        // Check authentication logic
-        return true;
-    }
-
-    private boolean isUserAuthorized(HttpServletRequest request) {
-        // Check authorization logic
-        return true;
     }
 }
