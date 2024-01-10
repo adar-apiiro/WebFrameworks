@@ -1,23 +1,22 @@
 import grails.rest.RestfulController;
 import grails.web.Action;
 import grails.web.mapping.responses.Responders;
-import groovy.transform.CompileStatic;
 
-@CompileStatic
-class BookController extends RestfulController<Book> {
+public class CustomBookController extends RestfulController<Book> {
 
     // Import specific classes for response formats
-    static responseFormats = [Responders.Json, Responders.Xml]
+    static final Responders.Json jsonResponder = Responders.Json;
+    static final Responders.Xml xmlResponder = Responders.Xml;
 
-    BookController() {
-        super(Book)
+    public CustomBookController() {
+        super(Book.class);
     }
 
     @Override
     @Action(detail = "Custom query for Book resource")
     protected Book queryForResource(Serializable id) {
-        Book.where {
+        return Book.where {
             it.id == id && author.id == params.authorId
-        }.find()
+        }.find();
     }
 }
