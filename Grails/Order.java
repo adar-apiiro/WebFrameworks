@@ -1,7 +1,7 @@
-import grails.rest.RestfulController
-import grails.web.Action
-import grails.web.mapping.responses.Responders
-import groovy.transform.CompileStatic
+import grails.rest.RestfulController;
+import grails.web.Action;
+import grails.web.mapping.responses.Responders;
+import groovy.transform.CompileStatic;
 
 @CompileStatic
 class BookController extends RestfulController<Book> {
@@ -17,7 +17,7 @@ class BookController extends RestfulController<Book> {
     @Action(detail = "Custom query for Book resource")
     protected Book queryForResource(Serializable id) {
         Book.where {
-            id == id && author.id == params.authorId
+            it.id == id && author.id == params.authorId
         }.find()
     }
 }
